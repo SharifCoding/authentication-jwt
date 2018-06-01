@@ -27,13 +27,13 @@ const jwtMW = exjwt({
 const users = [
   {
     id: 1,
-    username: 'homer',
-    password: 'donuts',
+    username: 'Homer',
+    password: 'Donuts',
   },
   {
     id: 2,
-    username: 'marge',
-    password: 'nodonut',
+    username: 'Marge',
+    password: 'noDonut',
   },
 ];
 
@@ -63,12 +63,14 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {
-  res.send('You are authenticated'); // Sending some response when authenticated
+  // Sending some response when authenticated
+  res.send('You are authenticated');
 });
 
 // Error handling
 app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') { // Send the error rather than to show it on the console
+  // Send the error rather than to show it on the console
+  if (err.name === 'UnauthorizedError') {
     res.status(401).send(err);
   } else {
     next(err);
